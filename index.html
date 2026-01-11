@@ -4,18 +4,105 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
+    <link rel="icon" href="./assets/favicon/nasa_icon.png" type="image/png">
     <title>Sistema Solar</title>
 </head>
 <body>
-    <a-scene>
+    <a-scene background="color: #000">
+        <a-assets>
+            <img id="sky" src="./assets/space_barrier.jpg">
+            <img id="sunTexture" src="./assets/sun_start_texture.jpg">
+            <img id="mercuryTexture" src="./assets/mercury_planet_texture.jpg">
+            <img id="venusTexture" src="./assets/venus_planet_texture.jpg">
+            <img id="earthTexture" src="./assets/earth_planet_texture.png">
+            <img id="earthCloudsTexture" src="./assets/earth_planet_clouds_texture.png">
+            <img id="moonTexture" src="./assets/moon_earth_texture.jpg">
+            <img id="marsTexture" src="./assets/mars_planet_texture.jpg">
+            <img id="jupiterTexture" src="./assets/jupiter_planet_texture.jpg">
+            <img id="saturnTexture" src="./assets/saturn_planet_texture.jpg">
+            <img id="saturnRingsTexture" src="./assets/saturn_rings_texture.jpg">
+            <img id="uranusTexture" src="./assets/uranus_planet_texture.jpg">
+            <img id="neptuneTexture" src="./assets/neptune_planet_texture.jpg">
+            <img id="plutoTexture" src="./assets/pluto_planet_texture.jpg">
+        </a-assets>
+
         <!-- Sol -->
-        <a-sphere position="0 0 0" radius="1" color="#FFD700"></a-sphere>
+        <a-sphere position="0 0 0" radius="5" material="src: #sunTexture; emissive: #FF8C00; emissiveIntensity: 1: shader: standard" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 40000; easing: linear"></a-sphere>
+        <a-sphere position="0 0 0" radius="5.2" material="color: #FFA500; opacity: 0.3; transparent: true"></a-sphere>
+
+        <!-- Mercúrio -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
+            <a-sphere position="10 0 0" radius="0.4" material="src: #mercuryTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Vénus -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 18000; easing: linear">
+            <a-sphere position="15 0 0" radius="0.6" material="src: #venusTexture" animation="property: rotation; to: 0 -360 0; loop: true; dur: 8000; easing: linear"></a-sphere>
+        </a-entity>
 
         <!-- Terra -->
-        <a-sphere position="5 0 0" radius="0.5" color="#4169E1"></a-sphere>
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 24000; easing: linear">
+            <a-sphere position="20 0 0" radius="0.65" material="src: #earthTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-sphere>
+            <a-sphere position="20 0 0" radius="0.66" material="src: #earthCloudsTexture; color: #FFA500; opacity: 0.7;" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-sphere>
+            <!-- Lua -->
+            <a-entity position="20 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear">
+                <a-sphere position="1.5 0 0" radius="0.18" material="src: #moonTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"></a-sphere>
+            </a-entity>
+        </a-entity>
 
-        <!-- Lua -->
-        <a-sphere position="6 0 0" radius="0.2" color="#C0C0C0"></a-sphere>
+        <!-- Marte -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 30000; easing: linear">
+            <a-sphere position="26 0 0" radius="0.5" material="src: #marsTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Júpiter -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear">
+            <a-sphere position="38 0 0" radius="1.5" material="src: #jupiterTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 12000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Saturno -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 65000; easing: linear">
+            <a-entity position="50 0 0" rotation="26.7 0 0">
+                <a-sphere radius="1.2" material="src: #saturnTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 13000; easing: linear"></a-sphere>
+                <a-ring position="0 0.02 0" rotation="-90 0 0" radius-inner="1.4" radius-outer="1.98" material="color: #C2B280; transparent: true; opacity: 0.9; side: double; shader: flat;"></a-ring>
+                <a-ring position="0 0.02 0" rotation="-90 0 0" radius-inner="2.0" radius-outer="2.4" material="color: #D2C3A1; transparent: true; opacity: 0.9; side: double; shader: flat;"></a-ring>
+            </a-entity>
+        </a-entity>
+
+        <!-- Úrano -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 80000; easing: linear">
+            <a-sphere position="62 0 0" radius="1" material="src: #uranusTexture" animation="property: rotation; to: 0 0 98; loop: true; dur: 14000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Neptuno -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 100000; easing: linear">
+            <a-sphere position="72 0 0" radius="1" material="src: #neptuneTexture" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 15000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Plutão -->
+        <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 140000; easing: linear">
+            <a-sphere position="80 0 0" radius="0.12" material="src: #plutoTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 18000; easing: linear"></a-sphere>
+        </a-entity>
+
+        <!-- Órbitas dos planetas -->
+        <a-torus position="0 0 0" color="#444444" radius="10" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="15" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="20" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="26" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="38" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="50" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="62" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="72" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+        <a-torus position="0 0 0" color="#444444" radius="80" radius-tubular="0.05" rotation="90 0 0" material="opacity: 0.3"></a-torus>
+
+        <!-- Estrelas de fundo -->
+        <a-sphere position="10 50 -50" radius="0.2" color="white" material="emissive: white"></a-sphere>
+        <a-sphere position="-30 60 -80" radius="0.15" color="white" material="emissive: white"></a-sphere>
+        <a-sphere position="40 70 -60" radius="0.18" color="white" material="emissive: white"></a-sphere>
+        <a-sphere position="-50 40 -90" radius="0.12" color="white" material="emissive: white"></a-sphere>
+        <a-sphere position="60 80 -70" radius="0.16" color="white" material="emissive: white"></a-sphere>
+        <a-sphere position="-70 30 -100" radius="0.14" color="white" material="emissive: white"></a-sphere>
     </a-scene>
 </body>
 </html>
