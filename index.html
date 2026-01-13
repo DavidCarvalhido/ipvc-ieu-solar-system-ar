@@ -9,10 +9,10 @@
     <title>Sistema Solar</title>
 </head>
 <body>
-    <a-scene background="color: #000">
+    <a-scene background="color: #000" cursor="rayOrigin: mouse">
         <a-assets>
-            <img id="sky" src="./assets/space_barrier.jpg">
-            <img id="sunTexture" src="./assets/sun_start_texture.jpg">
+            <img id="sky" src="./assets/solar_system_background_.jpg">
+            <img id="sunTexture" src="./assets/sun_star_texture.jpg">
             <img id="mercuryTexture" src="./assets/mercury_planet_texture.jpg">
             <img id="venusTexture" src="./assets/venus_planet_texture.jpg">
             <img id="earthTexture" src="./assets/earth_planet_texture.png">
@@ -27,44 +27,56 @@
             <img id="plutoTexture" src="./assets/pluto_planet_texture.jpg">
         </a-assets>
 
+        <!-- Camara com pointer -->
+        <a-entity camera look-controls wasd-controls position="0 10 50">
+            <a-cursor color="#42f545" opacity="0.8" scale="1.5 1.5 1.5" fuse="true" fuse-timeout="1500"></a-cursor>
+        </a-entity>
+
+        <!-- Background do cenário -->
+        <a-sky src="#sky"></a-sky>
+
+        <!-- Luz solar -->
+        <!--a luz ao estar ativada, ao passar o rato por cima do sul fica escuro -->
+        <a-light type="point" color="#ffffff" intensity="15.5" distance="250" position="0 0 0"></a-light>
+
         <!-- Sol -->
         <a-sphere position="0 0 0" radius="5" material="src: #sunTexture; emissive: #FF8C00; emissiveIntensity: 1: shader: standard" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 40000; easing: linear"></a-sphere>
-        <a-sphere position="0 0 0" radius="5.2" material="color: #FFA500; opacity: 0.3; transparent: true"></a-sphere>
+        <a-sphere class="planet" position="0 0 0" radius="5.2" material="color: #FFA500; opacity: 0.3; transparent: true" data-name="Sol" data-info="Estrela Sol"></a-sphere>
 
         <!-- Mercúrio -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
-            <a-sphere position="10 0 0" radius="0.4" material="src: #mercuryTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="10 0 0" radius="0.4" material="src: #mercuryTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear" data-name="Mercurio" data-info="Planeta Mercurio"></a-sphere>
         </a-entity>
 
         <!-- Vénus -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 18000; easing: linear">
-            <a-sphere position="15 0 0" radius="0.6" material="src: #venusTexture" animation="property: rotation; to: 0 -360 0; loop: true; dur: 8000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="15 0 0" radius="0.6" material="src: #venusTexture" animation="property: rotation; to: 0 -360 0; loop: true; dur: 8000; easing: linear" data-name="Venus" data-info="Planeta Venus"></a-sphere>
         </a-entity>
 
         <!-- Terra -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 24000; easing: linear">
             <a-sphere position="20 0 0" radius="0.65" material="src: #earthTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-sphere>
-            <a-sphere position="20 0 0" radius="0.66" material="src: #earthCloudsTexture; color: #FFA500; opacity: 0.7;" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="20 0 0" radius="0.66" material="src: #earthCloudsTexture; color: #FFA500; opacity: 0.7;" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 10000; easing: linear" data-name="Terra" data-info="Planeta Terra"></a-sphere>
             <!-- Lua -->
             <a-entity position="20 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear">
-                <a-sphere position="1.5 0 0" radius="0.18" material="src: #moonTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear"></a-sphere>
+                <a-sphere class="planet" position="1.5 0 0" radius="0.18" material="src: #moonTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear" data-name="Lua" data-info="A Lua"></a-sphere>
             </a-entity>
         </a-entity>
 
         <!-- Marte -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 30000; easing: linear">
-            <a-sphere position="26 0 0" radius="0.5" material="src: #marsTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="26 0 0" radius="0.5" material="src: #marsTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 9000; easing: linear" data-name="Marte" data-info="Planeta Marte"></a-sphere>
         </a-entity>
 
         <!-- Júpiter -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 50000; easing: linear">
-            <a-sphere position="38 0 0" radius="1.5" material="src: #jupiterTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 12000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="38 0 0" radius="1.5" material="src: #jupiterTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 12000; easing: linear" data-name="Jupiter" data-info="Planeta Jupiter"></a-sphere>
         </a-entity>
 
         <!-- Saturno -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 65000; easing: linear">
             <a-entity position="50 0 0" rotation="26.7 0 0">
-                <a-sphere radius="1.2" material="src: #saturnTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 13000; easing: linear"></a-sphere>
+                <a-sphere class="planet" radius="1.2" material="src: #saturnTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 13000; easing: linear" data-name="Saturno" data-info="Planeta Saturno"></a-sphere>
                 <a-ring position="0 0.02 0" rotation="-90 0 0" radius-inner="1.4" radius-outer="1.98" material="color: #C2B280; transparent: true; opacity: 0.9; side: double; shader: flat;"></a-ring>
                 <a-ring position="0 0.02 0" rotation="-90 0 0" radius-inner="2.0" radius-outer="2.4" material="color: #D2C3A1; transparent: true; opacity: 0.9; side: double; shader: flat;"></a-ring>
             </a-entity>
@@ -72,17 +84,17 @@
 
         <!-- Úrano -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 80000; easing: linear">
-            <a-sphere position="62 0 0" radius="1" material="src: #uranusTexture" animation="property: rotation; to: 0 0 98; loop: true; dur: 14000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="62 0 0" radius="1" material="src: #uranusTexture" animation="property: rotation; to: 0 0 98; loop: true; dur: 14000; easing: linear" data-name="Urano" data-info="Planeta Urano"></a-sphere>
         </a-entity>
 
         <!-- Neptuno -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 100000; easing: linear">
-            <a-sphere position="72 0 0" radius="1" material="src: #neptuneTexture" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 15000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="72 0 0" radius="1" material="src: #neptuneTexture" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 15000; easing: linear" data-name="Neptuno" data-info="Planeta Neptuno"></a-sphere>
         </a-entity>
 
         <!-- Plutão -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 140000; easing: linear">
-            <a-sphere position="80 0 0" radius="0.12" material="src: #plutoTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 18000; easing: linear"></a-sphere>
+            <a-sphere class="planet" position="80 0 0" radius="0.12" material="src: #plutoTexture" animation="property: rotation; to: 0 360 0; loop: true; dur: 18000; easing: linear" data-name="Plutao" data-info="Planeta Plutao"></a-sphere>
         </a-entity>
 
         <!-- Órbitas dos planetas -->
@@ -103,6 +115,85 @@
         <a-sphere position="-50 40 -90" radius="0.12" color="white" material="emissive: white"></a-sphere>
         <a-sphere position="60 80 -70" radius="0.16" color="white" material="emissive: white"></a-sphere>
         <a-sphere position="-70 30 -100" radius="0.14" color="white" material="emissive: white"></a-sphere>
+
+        <!-- Painel com informações dos planetas -->
+        <a-entity id="infoPanel" visible="false">
+            <a-plane width="4" height="2.5" color="#000000" opacity="0.85" position="0 0 0"></a-plane>
+            <a-text id="planetName" value="" align="center" width="6" position="0 0.6 0.01" color="#FFFFFF" font="roboto"></a-text>
+            <a-text id="planetInfo" value="" align="center" width="5" position="0 0 0.01" color="#CCCCCC" wrap-count="30"></a-text>
+            <a-plane width="2" height="0.5" color="#FF4444" position="0 -0.8 0.01" class="closeButton">
+                <a-text value="FECHAR" align="center" width="4" position="0 0 0.01" color="#FFFFFF"></a-text>
+            </a-plane>
+        </a-entity>
     </a-scene>
+
+    <script>
+        let selectedPlanet = null;
+
+        // Aguarda o carregamento do cenário scenario
+        document.querySelector('a-scene').addEventListener('loaded', function() {
+            // Adiciona eventos de clique aos planetas
+            const clickables = document.querySelectorAll('.planet');
+            clickables.forEach(planet => {
+                planet.addEventListener('click', function() {
+                    if (isPaused) {
+                        showPlanetInfo(this);
+                    }
+                });
+
+                // Efeito hover no painel
+                planet.addEventListener('mouseenter', function() {
+                    if (isPaused) {
+                        this.setAttribute('material', 'opacity', 0.8);
+                    }
+                });
+
+                planet.addEventListener('mouseleave', function() {
+                    this.setAttribute('material', 'opacity', 1);
+                });
+            });
+
+            // Botão para fechar o painel
+            const closeBtn = document.querySelector('.closeButton');
+            closeBtn.addEventListener('click', function() {
+                hidePlanetInfo();
+            });
+        });
+
+        // Se detetar o rato ou clique, irá mostrar o painel
+        function showPlanetInfo(planet) {
+            selectedPlanet = planet;
+            const panel = document.getElementById('infoPanel');
+            const nameText = document.getElementById('planetName');
+            const infoText = document.getElementById('planetInfo');
+
+            // Pega os dados do planeta
+            const planetName = planet.getAttribute('data-name');
+            const planetInfo = planet.getAttribute('data-info');
+
+            // Atualiza os textos
+            nameText.setAttribute('value', planetName);
+            infoText.setAttribute('value', planetInfo);
+
+            // Posiciona o painel ao lado do planeta
+            const worldPos = planet.object3D.getWorldPosition(new THREE.Vector3());
+            panel.object3D.position.copy(worldPos);
+            panel.object3D.position.x += 2; // Offset para o lado
+            panel.object3D.position.y += 5;
+
+            // Faz o painel olhar para a câmera
+            const camera = document.querySelector('[camera]');
+            panel.object3D.lookAt(camera.object3D.position);
+
+            // Mostra o painel
+            panel.setAttribute('visible', true);
+        }
+
+        function hidePlanetInfo() {
+            const panel = document.getElementById('infoPanel');
+            panel.setAttribute('visible', false);
+            selectedPlanet = null;
+        }
+    </script>
 </body>
 </html>
