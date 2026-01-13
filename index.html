@@ -6,9 +6,13 @@
     <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
     <script src="https://unpkg.com/aframe-event-set-component@5.x.x/dist/aframe-event-set-component.min.js"></script>
     <link rel="icon" href="./assets/favicon/nasa_icon.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
     <title>Sistema Solar</title>
 </head>
 <body>
+    <div id="controls">
+        <button id="pauseBtn" onclick="togglePause()">⏸ Pausar</button>
+    </div>
     <a-scene background="color: #000" cursor="rayOrigin: mouse">
         <a-assets>
             <img id="sky" src="./assets/solar_system_background_.jpg">
@@ -129,6 +133,7 @@
 
     <script>
         let selectedPlanet = null;
+        let isPaused = false;
 
         // Aguarda o carregamento do cenário scenario
         document.querySelector('a-scene').addEventListener('loaded', function() {
@@ -193,6 +198,37 @@
             const panel = document.getElementById('infoPanel');
             panel.setAttribute('visible', false);
             selectedPlanet = null;
+        }
+
+        // Função para pausar as animações
+        function togglePause() {
+            isPaused = !isPaused;
+            const btn = document.getElementById('pauseBtn');
+            const scene = document.querySelector('a-scene');
+
+            if (scene.hasLoaded) {
+                pauseAnimations();
+            } else {
+                scene.addEventListener('loaded', pauseAnimations);
+            }
+
+            function pauseAnimations() {
+                const animations = document.querySelectorAll('[animation]');
+
+                animations.forEach(el => {
+                    const anim = el.components.animation;
+
+                    if (anim) {
+                        if (isPaused) {
+                            anim.pauseAnimation();
+                            btn.innerHTML = '▶ Retomar';
+                        } else {
+                            anim.resumeAnimation();
+                            btn.innerHTML = '⏸ Pausar';
+                        }
+                    }
+                });
+            }
         }
     </script>
 </body>
