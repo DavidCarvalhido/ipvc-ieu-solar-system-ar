@@ -20,3 +20,26 @@
 #pauseBtn:hover {
     background: rgba(255, 255, 255, 1);
 }
+
+#audioBtn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    padding: 12px;
+    font-size: 24px;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#audioBtn:hover {
+    background: rgba(255, 255, 255, 1);
+}

@@ -13,6 +13,11 @@
     <div id="controls">
         <button id="pauseBtn" onclick="togglePause()">⏸ Pausar</button>
     </div>
+
+    <div>
+        <button id="audioBtn" onclick="toggleAudio()">🔊</button>
+    </div>
+
     <a-scene background="color: #000" cursor="rayOrigin: mouse">
         <a-assets>
             <img id="sky" src="./assets/solar_system_background_.jpg">
@@ -29,7 +34,12 @@
             <img id="uranusTexture" src="./assets/uranus_planet_texture.jpg">
             <img id="neptuneTexture" src="./assets/neptune_planet_texture.jpg">
             <img id="plutoTexture" src="./assets/pluto_planet_texture.jpg">
+
+            <!-- Áudio -->
+            <audio id="ambientSound" src="./assets/space-chords-loop-310493.mp3" preload="auto"></audio>
         </a-assets>
+
+        <a-entity id="ambientAudio" sound="src: #ambientSound; loop: true; volume: 0.4; positional: false"></a-entity>
 
         <!-- Camara com pointer -->
         <a-entity camera look-controls wasd-controls position="0 10 50">
@@ -162,5 +172,6 @@
     <!-- JavaScript -->
     <script src="./js/pause_animations.js"></script>
     <script src="./js/pane_interaction.js"></script>
+    <script src="./js/sound.js"></script>
 </body>
 </html>
