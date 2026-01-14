@@ -41,11 +41,11 @@
 
         <!-- Luz solar -->
         <!--a luz ao estar ativada, ao passar o rato por cima do sul fica escuro -->
-        <a-light type="point" color="#ffffff" intensity="15.5" distance="250" position="0 0 0"></a-light>
+        <!-- <a-light type="point" color="#ffffff" intensity="15.5" distance="250" position="0 0 0"></a-light>
+        <a-light type="point" color="#ffffff" intensity="5.5" distance="250" position="0 13 0"></a-light> -->
 
         <!-- Sol -->
-        <a-sphere position="0 0 0" radius="5" material="src: #sunTexture; emissive: #FF8C00; emissiveIntensity: 1: shader: standard" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 40000; easing: linear"></a-sphere>
-        <a-sphere class="planet" position="0 0 0" radius="5.2" material="color: #FFA500; opacity: 0.3; transparent: true" data-name="Sol" data-info="Estrela Sol"></a-sphere>
+        <a-sphere class="planet" position="0 0 0" radius="5" material="src: #sunTexture; emissive: #FF8C00; emissiveIntensity: 1: shader: standard" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 40000; easing: linear" data-name="Sol" data-info="Estrela Sol"></a-sphere>
 
         <!-- Mercúrio -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear">
@@ -59,8 +59,7 @@
 
         <!-- Terra -->
         <a-entity animation="property: rotation; to: 0 360 0; loop: true; dur: 24000; easing: linear">
-            <a-sphere position="20 0 0" radius="0.65" material="src: #earthTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear"></a-sphere>
-            <a-sphere class="planet" position="20 0 0" radius="0.66" material="src: #earthCloudsTexture; color: #FFA500; opacity: 0.7;" animation="property: rotation; from: 0 0 0; to: 0 360 0; loop: true; dur: 10000; easing: linear" data-name="Terra" data-info="Planeta Terra"></a-sphere>
+            <a-sphere class="planet" position="20 0 0" radius="0.65" material="src: #earthTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 10000; easing: linear" data-name="Terra" data-info="Planeta Terra"></a-sphere>
             <!-- Lua -->
             <a-entity position="20 0 0" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear">
                 <a-sphere class="planet" position="1.5 0 0" radius="0.18" material="src: #moonTexture;" animation="property: rotation; to: 0 360 0; loop: true; dur: 6000; easing: linear" data-name="Lua" data-info="A Lua"></a-sphere>
@@ -122,114 +121,46 @@
 
         <!-- Painel com informações dos planetas -->
         <a-entity id="infoPanel" visible="false">
-            <a-plane width="4" height="2.5" color="#000000" opacity="0.85" position="0 0 0"></a-plane>
-            <a-text id="planetName" value="" align="center" width="6" position="0 0.6 0.01" color="#FFFFFF" font="roboto"></a-text>
-            <a-text id="planetInfo" value="" align="center" width="5" position="0 0 0.01" color="#CCCCCC" wrap-count="30"></a-text>
-            <a-plane width="2" height="0.5" color="#FF4444" position="0 -0.8 0.01" class="closeButton">
-                <a-text value="FECHAR" align="center" width="4" position="0 0 0.01" color="#FFFFFF"></a-text>
+            <!-- Fundo -->
+            <a-plane width="7.9" height="9.5" color="#000" opacity="0.9"></a-plane>
+            <!-- Título -->
+            <a-text id="planetName" position="-3.5 3.7 0.2" align="left" width="20" color="#FFF" value=""></a-text>
+            <!-- Imagem -->
+            <a-plane id="planetImage" position="0 1.7 0.2" width="6.7" height="2.8" material="shader: flat; src:"></a-plane>
+            <!-- Caraterísticas dos planetas -->
+            <a-text id="planetSpecs" position="-3.4 -0.5 0.2" width="10" align="left" color="#CCC"value=""></a-text>
+            <!-- Botões do quiz -->
+            <a-entity id="quizButtons" position="0 -2.2 0.2">
+                <a-plane class="quizBtn" data-q="0" position="-2.4 0 0" width="1.8" height="1.3" color="#444">
+                    <a-text value="1" align="center" width="12"></a-text>
+                </a-plane>
+                <a-plane class="quizBtn" data-q="1" position="0 0 0" width="1.8" height="1.3" color="#444">
+                    <a-text value="2" align="center" width="12"></a-text>
+                </a-plane>
+                <a-plane class="quizBtn" data-q="2" position="2.4 0 0" width="1.8" height="1.3" color="#444">
+                    <a-text value="3" align="center" width="12"></a-text>
+                </a-plane>
+            </a-entity>
+
+            <!-- Painel da pergunta -->
+            <a-entity id="questionPanel" position="7 -1.4 0.2" visible="false">
+                <a-plane class="closeQuizBtn" position="2.3 1 0.2" width="0.5" height="0.5" color="#AA3333">
+                    <a-text value="X" align="center" width="8" position="0 0.1 0"></a-text>
+                </a-plane>
+                <a-plane width="6" height="2.9" color="#111" opacity="0.95"></a-plane>
+                <a-text id="questionText" position="0 0.45 0.2" width="10" align="center" value=""></a-text>
+                <a-entity id="answerButtons" position="0 -0.2 0.2"></a-entity>
+            </a-entity>
+
+            <!-- Fechar -->
+            <a-plane class="closeButton" position="0 -3.8 0.3" width="3.2" height="1.1" color="#AA3333">
+                <a-text value="FECHAR" align="center" width="12" position="0 0.1 0.3"></a-text>
             </a-plane>
         </a-entity>
     </a-scene>
 
-    <script>
-        let selectedPlanet = null;
-        let isPaused = false;
-
-        // Aguarda o carregamento do cenário scenario
-        document.querySelector('a-scene').addEventListener('loaded', function() {
-            // Adiciona eventos de clique aos planetas
-            const clickables = document.querySelectorAll('.planet');
-            clickables.forEach(planet => {
-                planet.addEventListener('click', function() {
-                    if (isPaused) {
-                        showPlanetInfo(this);
-                    }
-                });
-
-                // Efeito hover no painel
-                planet.addEventListener('mouseenter', function() {
-                    if (isPaused) {
-                        this.setAttribute('material', 'opacity', 0.8);
-                    }
-                });
-
-                planet.addEventListener('mouseleave', function() {
-                    this.setAttribute('material', 'opacity', 1);
-                });
-            });
-
-            // Botão para fechar o painel
-            const closeBtn = document.querySelector('.closeButton');
-            closeBtn.addEventListener('click', function() {
-                hidePlanetInfo();
-            });
-        });
-
-        // Se detetar o rato ou clique, irá mostrar o painel
-        function showPlanetInfo(planet) {
-            selectedPlanet = planet;
-            const panel = document.getElementById('infoPanel');
-            const nameText = document.getElementById('planetName');
-            const infoText = document.getElementById('planetInfo');
-
-            // Pega os dados do planeta
-            const planetName = planet.getAttribute('data-name');
-            const planetInfo = planet.getAttribute('data-info');
-
-            // Atualiza os textos
-            nameText.setAttribute('value', planetName);
-            infoText.setAttribute('value', planetInfo);
-
-            // Posiciona o painel ao lado do planeta
-            const worldPos = planet.object3D.getWorldPosition(new THREE.Vector3());
-            panel.object3D.position.copy(worldPos);
-            panel.object3D.position.x += 2; // Offset para o lado
-            panel.object3D.position.y += 5;
-
-            // Faz o painel olhar para a câmera
-            const camera = document.querySelector('[camera]');
-            panel.object3D.lookAt(camera.object3D.position);
-
-            // Mostra o painel
-            panel.setAttribute('visible', true);
-        }
-
-        function hidePlanetInfo() {
-            const panel = document.getElementById('infoPanel');
-            panel.setAttribute('visible', false);
-            selectedPlanet = null;
-        }
-
-        // Função para pausar as animações
-        function togglePause() {
-            isPaused = !isPaused;
-            const btn = document.getElementById('pauseBtn');
-            const scene = document.querySelector('a-scene');
-
-            if (scene.hasLoaded) {
-                pauseAnimations();
-            } else {
-                scene.addEventListener('loaded', pauseAnimations);
-            }
-
-            function pauseAnimations() {
-                const animations = document.querySelectorAll('[animation]');
-
-                animations.forEach(el => {
-                    const anim = el.components.animation;
-
-                    if (anim) {
-                        if (isPaused) {
-                            anim.pauseAnimation();
-                            btn.innerHTML = '▶ Retomar';
-                        } else {
-                            anim.resumeAnimation();
-                            btn.innerHTML = '⏸ Pausar';
-                        }
-                    }
-                });
-            }
-        }
-    </script>
+    <!-- JavaScript -->
+    <script src="./js/pause_animations.js"></script>
+    <script src="./js/pane_interaction.js"></script>
 </body>
 </html>
